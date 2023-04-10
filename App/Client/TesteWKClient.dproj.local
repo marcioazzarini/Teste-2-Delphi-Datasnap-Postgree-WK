@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/04/08 10:59:12.000.112,=C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 10:59:47.000.807,C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uCadPessoa.dfm</Transaction>
+    <Transaction>2023/04/08 10:59:47.000.807,C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uCadPessoa.pas</Transaction>
+    <Transaction>2023/04/08 11:00:13.000.254,C:\Users\marci\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\TesteWKClient.dproj</Transaction>
+    <Transaction>2023/04/08 11:00:47.000.270,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 11:00:51.000.914,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.dfm=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uDM.dfm</Transaction>
+    <Transaction>2023/04/08 11:00:51.000.914,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uDM.pas</Transaction>
+    <Transaction>2023/04/08 13:50:32.000.665,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 13:57:13.000.952,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 13:57:53.000.919,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uServerCalls.pas</Transaction>
+    <Transaction>2023/04/08 19:56:35.000.016,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 19:56:41.000.959,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uPessoaClass.pas</Transaction>
+    <Transaction>2023/04/08 21:45:08.057,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 21:45:15.056,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uBuscaCEP.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 22:23:34.817,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 22:23:47.475,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uEndereco.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 22:47:06.243,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 22:47:22.956,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uCEP.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 22:49:11.773,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uCEP.pas=</Transaction>
+    <Transaction>2023/04/08 23:06:28.571,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 23:06:40.255,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uEnderecoClass.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 23:10:03.975,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uBuscaCEPXML.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uEndereco.pas</Transaction>
+    <Transaction>2023/04/10 08:23:30.855,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/10 08:23:42.910,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uInterfaceClass.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/10 08:25:43.008,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uInterface.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uInterfaceClass.pas</Transaction>
+    <Transaction>2023/04/10 08:30:41.876,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uEnderecoClass.pas=</Transaction>
+    <Transaction>2023/04/10 08:30:41.893,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uInterface.pas=</Transaction>
+    <Transaction>2023/04/10 08:30:41.933,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uPessoaClass.pas=</Transaction>
+    <Transaction>2023/04/10 08:30:42.012,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uServerCalls.pas=</Transaction>
+    <Transaction>2023/04/10 08:31:06.771,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Classes\uEnderecoClass.pas</Transaction>
+    <Transaction>2023/04/10 08:31:06.783,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Classes\uInterface.pas</Transaction>
+    <Transaction>2023/04/10 08:31:06.795,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Classes\uPessoaClass.pas</Transaction>
+    <Transaction>2023/04/10 08:31:06.819,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Classes\uServerCalls.pas</Transaction>
+    <Transaction>2023/04/10 09:21:40.634,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uBuscaCEP.pas=</Transaction>
+    <Transaction>2023/04/10 09:21:45.183,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\uBuscaCEPXML.pas=</Transaction>
+    <Transaction>2023/04/10 10:03:28.309,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+    <Transaction>2023/04/10 10:03:37.836,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Classes\uCEPClass.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Client\Unit1.pas</Transaction>
+  </Transactions>  <ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Classes"/>
+    <File Path="Classes\uCEPClass.pas"/>
+    <File Path="Classes\uEnderecoClass.pas"/>
+    <File Path="Classes\uInterface.pas"/>
+    <File Path="Classes\uPessoaClass.pas"/>
+    <File Path="Classes\uServerCalls.pas"/>
+    <File Path="uCadPessoa.pas"/>
+    <File Path="uCadPessoa.dfm"/>
+    <File Path="uDM.pas"/>
+    <File Path="uDM.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

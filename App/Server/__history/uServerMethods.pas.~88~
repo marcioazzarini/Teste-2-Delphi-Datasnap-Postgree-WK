@@ -1,0 +1,270 @@
+unit uServerMethods;
+
+interface
+
+uses System.SysUtils, System.Classes, System.Json,
+    Datasnap.DSServer, Datasnap.DSAuth, DataSnap.DSProviderDataModuleAdapter,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, Datasnap.Provider, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Datasnap.DBClient;
+
+type
+{$METHODINFO ON}
+  TServerMethods1 = class(TDataModule)
+    qryPessoa: TFDQuery;
+    qryPessoaidpessoa: TLargeintField;
+    qryPessoafinatureza: TSmallintField;
+    qryPessoadsdocumento: TWideStringField;
+    qryPessoanmprimeiro: TWideStringField;
+    qryPessoanmsegundo: TWideStringField;
+    qryPessoadtregistro: TDateField;
+    dspPessoa: TDataSetProvider;
+    qryEndereco: TFDQuery;
+    qryEnderecoidendereco: TLargeintField;
+    qryEnderecoidpessoa: TLargeintField;
+    qryEnderecodscep: TWideStringField;
+    dspEndereco: TDataSetProvider;
+    qryEnderecodsuf: TWideStringField;
+    qryEndereconmcidade: TWideStringField;
+    qryEndereconmbairro: TWideStringField;
+    qryEndereconmlogradouro: TWideStringField;
+    qryEnderecodscomplemento: TWideStringField;
+    qryPessoaInsert: TFDQuery;
+    qryEnderecoIntegDelete: TFDQuery;
+    qryEnderecoIntegUpdate: TFDQuery;
+    qryEnderecoIntegInsert: TFDQuery;
+    qryEnderecoDelete: TFDQuery;
+    qryEnderecoUpdate: TFDQuery;
+    qryEnderecoInsert: TFDQuery;
+    qryPessoaDelete: TFDQuery;
+    qryPessoaUpdate: TFDQuery;
+    qryAux: TFDQuery;
+    qryEnd: TFDQuery;
+    dspEnd: TDataSetProvider;
+    qryEndidendereco: TLargeintField;
+    qryEndidpessoa: TLargeintField;
+    qryEnddscep: TWideStringField;
+    qryEnderecoPessoaDelete: TFDQuery;
+    qryEnderecoIntegPessoaDelete: TFDQuery;
+    cdsRetornoCEP: TClientDataSet;
+    cdsRetornoCEPCep: TStringField;
+    cdsRetornoCEPLogradouro: TStringField;
+    cdsRetornoCEPBairro: TStringField;
+    cdsRetornoCEPLocalidade: TStringField;
+    cdsRetornoCEPUF: TStringField;
+  private
+
+    { Private declarations }
+  public
+    { Public declarations }
+    function EchoString(Value: string): string;
+    function ReverseString(Value: string): string;
+    function GetPessoas: TDataSet;
+    function GetEnderecos(idpessoa: integer = -1): TDataSet;
+    function SalvaPessoa(idpessoa, finatureza: integer; dsdocumento, nmprimeiro,
+                          nmsegundo: String; dtregistro: TDateTime): Integer;
+    procedure ExcluiPessoa(idpessoa: integer);
+    function SalvaEndereco(idendereco, idpessoa: integer; dscep, dsuf, nmcidade,
+                            nmbairro, nmlogradouro, dscomplemento: String): Integer;
+    procedure ExcluiEndereco(idendereco: integer);
+    function GetNextId(sGenName: string): integer;
+
+    function GetEnd(idpessoa: integer): TDataSet;
+
+    function GetCEP(sCEP: string): TDataSet;
+  end;
+{$METHODINFO OFF}
+
+implementation
+
+
+{$R *.dfm}
+
+
+uses System.StrUtils, uDM, uBuscaCEPXML;
+
+function TServerMethods1.EchoString(Value: string): string;
+begin
+  Result := Value;
+end;
+
+procedure TServerMethods1.ExcluiEndereco(idendereco: integer);
+begin
+  qryEnderecoIntegDelete.Close;
+  qryEnderecoIntegDelete.ParamByName('idendereco').AsInteger := idendereco;
+  qryEnderecoIntegDelete.ExecSQL;
+
+  qryEnderecoDelete.Close;
+  qryEnderecoDelete.ParamByName('idendereco').AsInteger := idendereco;
+  qryEnderecoDelete.ExecSQL;
+end;
+
+procedure TServerMethods1.ExcluiPessoa(idpessoa: integer);
+begin
+  qryEnderecoIntegPessoaDelete.Close;
+  qryEnderecoIntegPessoaDelete.ParamByName('idpessoa').AsInteger := idpessoa;
+  qryEnderecoIntegPessoaDelete.ExecSQL;
+
+  qryEnderecoPessoaDelete.Close;
+  qryEnderecoPessoaDelete.ParamByName('idpessoa').AsInteger := idpessoa;
+  qryEnderecoPessoaDelete.ExecSQL;
+
+  qryPessoaDelete.Close;
+  qryPessoaDelete.ParamByName('idpessoa').AsInteger := idpessoa;
+  qryPessoaDelete.ExecSQL;
+end;
+
+function TServerMethods1.GetEnderecos(idpessoa: integer): TDataSet;
+begin
+  qryEndereco.Close;
+  qryEndereco.ParamByName('idpessoa').AsInteger := idpessoa;
+  qryEndereco.Open;
+  Result := qryEndereco;
+end;
+
+function TServerMethods1.GetCEP(sCEP: string): TDataSet;
+var
+  objCEP: TBuscaCepXML;
+begin
+  objCEP := TBuscaCEPXML.Create(sCEP);
+
+  cdsRetornoCEP.Open;
+  cdsRetornoCEP.EmptyDataSet;
+  cdsRetornoCEP.Insert;
+  cdsRetornoCEPCep.AsString := objCEP.Cep;
+  cdsRetornoCEPUF.AsString := objCEP.UF;
+  cdsRetornoCEPBairro.AsString := objCEP.Bairro;
+  cdsRetornoCEPLocalidade.AsString := objCEP.Localidade;
+  cdsRetornoCEPLogradouro.AsString := objCEP.Logradouro;
+
+end;
+
+function TServerMethods1.GetEnd(idpessoa: integer): TDataSet;
+begin
+  qryEnd.Close;
+  qryEnd.ParamByName('idpessoa').AsInteger := idpessoa;
+  qryEnd.Open;
+  Result := qryEnd;
+end;
+
+
+function TServerMethods1.GetNextId(sGenName: string): integer;
+begin
+  qryAux.SQL.Clear;
+  qryAux.SQL.Add('SELECT nextval(' + QuotedStr(sGenName) + ')');
+  try
+    qryAux.Open;
+    Result := qryAux.Fields[0].AsInteger;
+  finally
+    qryAux.Close;
+  end;
+end;
+
+function TServerMethods1.GetPessoas: TDataSet;
+begin
+  qryPessoa.Close;
+  qryPessoa.Open;
+  Result := qryPessoa;
+end;
+
+function TServerMethods1.ReverseString(Value: string): string;
+begin
+  Result := System.StrUtils.ReverseString(Value);
+end;
+
+function TServerMethods1.SalvaEndereco(idendereco, idpessoa: integer; dscep,
+  dsuf, nmcidade, nmbairro, nmlogradouro, dscomplemento: String): Integer;
+var
+  iIdEndereco: integer;
+begin
+  if (idendereco = -1) then
+  begin
+    DM.FDConn.StartTransaction;
+    try
+      iIdEndereco := GetNextId('seq_endereco');
+      qryEnderecoInsert.ParamByName('idendereco').AsInteger := iIdEndereco;
+      qryEnderecoInsert.ParamByName('idpessoa').AsInteger := idpessoa;
+      qryEnderecoInsert.ParamByName('dscep').AsString := dscep;
+      qryEnderecoInsert.ExecSQL;
+
+      qryEnderecoIntegInsert.ParamByName('idendereco').AsInteger := iIdEndereco;
+      qryEnderecoIntegInsert.ParamByName('dsuf').AsString := dsuf;
+      qryEnderecoIntegInsert.ParamByName('nmcidade').AsString := nmcidade;
+      qryEnderecoIntegInsert.ParamByName('nmbairro').AsString := nmbairro;
+      qryEnderecoIntegInsert.ParamByName('nmlogradouro').AsString := nmlogradouro;
+      qryEnderecoIntegInsert.ParamByName('dscomplemento').AsString := dscomplemento;
+      qryEnderecoIntegInsert.ExecSQL;
+
+      DM.FDConn.Commit;
+    except
+      On E: Exception do
+      begin
+        DM.FDConn.Rollback;
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  end
+  else
+  begin
+    DM.FDConn.StartTransaction;
+    try
+      iIdEndereco := idendereco;
+      qryEnderecoUpdate.ParamByName('idendereco').AsInteger := idendereco;
+      qryEnderecoUpdate.ParamByName('idpessoa').AsInteger := idpessoa;
+      qryEnderecoUpdate.ParamByName('dscep').AsString := dscep;
+      qryEnderecoUpdate.ExecSQL;
+
+      qryEnderecoIntegUpdate.ParamByName('idendereco').AsInteger := idendereco;
+      qryEnderecoIntegUpdate.ParamByName('dsuf').AsString := dsuf;
+      qryEnderecoIntegUpdate.ParamByName('nmcidade').AsString := nmcidade;
+      qryEnderecoIntegUpdate.ParamByName('nmbairro').AsString := nmbairro;
+      qryEnderecoIntegUpdate.ParamByName('nmlogradouro').AsString := nmlogradouro;
+      qryEnderecoIntegUpdate.ParamByName('dscomplemento').AsString := dscomplemento;
+      qryEnderecoIntegUpdate.ExecSQL;
+
+      DM.FDConn.Commit;
+    except
+      On E: Exception do
+      begin
+        DM.FDConn.Rollback;
+        raise Exception.Create(E.Message);
+      end;
+    end;
+  end;
+
+  Result := iIdEndereco;
+end;
+
+function TServerMethods1.SalvaPessoa(idpessoa, finatureza: Integer;
+  dsdocumento, nmprimeiro, nmsegundo: String; dtregistro: TDateTime): Integer;
+var
+  iIdPessoa: Integer;
+begin
+  if (idpessoa = -1) then
+  begin //Insert
+     iIdPessoa := GetNextId('seq_pessoa');
+     qryPessoaInsert.ParamByName('idpessoa').AsInteger := iIdPessoa;
+     qryPessoaInsert.ParamByName('finatureza').AsInteger := finatureza;
+     qryPessoaInsert.ParamByName('dsdocumento').AsString := dsdocumento;
+     qryPessoaInsert.ParamByName('nmprimeiro').AsString := nmprimeiro;
+     qryPessoaInsert.ParamByName('nmsegundo').AsString := nmsegundo;
+     qryPessoaInsert.ParamByName('dtregistro').AsDateTime := dtregistro;
+     qryPessoaInsert.ExecSQL;
+  end
+  else
+  begin //Update
+     iIdPessoa := idpessoa;
+     qryPessoaUpdate.ParamByName('idpessoa').AsInteger := idpessoa;
+     qryPessoaUpdate.ParamByName('finatureza').AsInteger := finatureza;
+     qryPessoaUpdate.ParamByName('dsdocumento').AsString := dsdocumento;
+     qryPessoaUpdate.ParamByName('nmprimeiro').AsString := nmprimeiro;
+     qryPessoaUpdate.ParamByName('nmsegundo').AsString := nmsegundo;
+     //qryPessoaUpdate.ParamByName('dtregistro').AsDateTime := dtregistro;
+     qryPessoaUpdate.ExecSQL;
+  end;
+  Result := iIdPessoa;
+end;
+
+end.
+

@@ -1,0 +1,21 @@
+program TesteWKClient;
+
+uses
+  Vcl.Forms,
+  uCadPessoa in 'uCadPessoa.pas' {frmCadPessoa},
+  uDM in 'uDM.pas' {DM: TDataModule},
+  uServerCalls in 'uServerCalls.pas',
+  uPessoaClass in 'uPessoaClass.pas',
+  uBuscaCEP in 'uBuscaCEP.pas',
+  uBuscaCEPXML in 'uBuscaCEPXML.pas',
+  uEnderecoClass in 'uEnderecoClass.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmCadPessoa, frmCadPessoa);
+  Application.CreateForm(TDM, DM);
+  Application.Run;
+end.

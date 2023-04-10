@@ -1,0 +1,210 @@
+//
+// Created by the DataSnap proxy generator.
+// 08/04/2023 18:52:12
+//
+
+unit uServerCalls;
+
+interface
+
+uses System.JSON, Data.DBXCommon, Data.DBXClient, Data.DBXDataSnap, Data.DBXJSON, Datasnap.DSProxy, System.Classes, System.SysUtils, Data.DB, Data.SqlExpr, Data.DBXDBReaders, Data.DBXCDSReaders, Data.DBXJSONReflect;
+
+type
+  TServerMethods1Client = class(TDSAdminClient)
+  private
+    FEchoStringCommand: TDBXCommand;
+    FReverseStringCommand: TDBXCommand;
+    FGetPessoasCommand: TDBXCommand;
+    FGetEnderecosCommand: TDBXCommand;
+    FSalvaPessoaCommand: TDBXCommand;
+    FExcluiPessoaCommand: TDBXCommand;
+    FSalvaEnderecoCommand: TDBXCommand;
+    FExcluiEnderecoCommand: TDBXCommand;
+    FGetNextIdCommand: TDBXCommand;
+  public
+    constructor Create(ADBXConnection: TDBXConnection); overload;
+    constructor Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean); overload;
+    destructor Destroy; override;
+    function EchoString(Value: string): string;
+    function ReverseString(Value: string): string;
+    function GetPessoas: TDataSet;
+    function GetEnderecos(idpessoa: Integer): TDataSet;
+    function SalvaPessoa(idpessoa: Integer; finatureza: Integer; dsdocumento: string; nmprimeiro: string; nmsegundo: string; dtregistro: TDateTime): Integer;
+    procedure ExcluiPessoa(idpessoa: Integer);
+    function SalvaEndereco(idendereco: Integer; idpessoa: Integer; dscep: string; dsuf: string; nmcidade: string; nmbairro: string; nmlogradouro: string; dscomplemento: string): Integer;
+    procedure ExcluiEndereco(idendereco: Integer);
+    function GetNextId(sGenName: string): Integer;
+  end;
+
+implementation
+
+function TServerMethods1Client.EchoString(Value: string): string;
+begin
+  if FEchoStringCommand = nil then
+  begin
+    FEchoStringCommand := FDBXConnection.CreateCommand;
+    FEchoStringCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FEchoStringCommand.Text := 'TServerMethods1.EchoString';
+    FEchoStringCommand.Prepare;
+  end;
+  FEchoStringCommand.Parameters[0].Value.SetWideString(Value);
+  FEchoStringCommand.ExecuteUpdate;
+  Result := FEchoStringCommand.Parameters[1].Value.GetWideString;
+end;
+
+function TServerMethods1Client.ReverseString(Value: string): string;
+begin
+  if FReverseStringCommand = nil then
+  begin
+    FReverseStringCommand := FDBXConnection.CreateCommand;
+    FReverseStringCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FReverseStringCommand.Text := 'TServerMethods1.ReverseString';
+    FReverseStringCommand.Prepare;
+  end;
+  FReverseStringCommand.Parameters[0].Value.SetWideString(Value);
+  FReverseStringCommand.ExecuteUpdate;
+  Result := FReverseStringCommand.Parameters[1].Value.GetWideString;
+end;
+
+function TServerMethods1Client.GetPessoas: TDataSet;
+begin
+  if FGetPessoasCommand = nil then
+  begin
+    FGetPessoasCommand := FDBXConnection.CreateCommand;
+    FGetPessoasCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FGetPessoasCommand.Text := 'TServerMethods1.GetPessoas';
+    FGetPessoasCommand.Prepare;
+  end;
+  FGetPessoasCommand.ExecuteUpdate;
+  Result := TCustomSQLDataSet.Create(nil, FGetPessoasCommand.Parameters[0].Value.GetDBXReader(False), True);
+  Result.Open;
+  if FInstanceOwner then
+    FGetPessoasCommand.FreeOnExecute(Result);
+end;
+
+function TServerMethods1Client.GetEnderecos(idpessoa: Integer): TDataSet;
+begin
+  if FGetEnderecosCommand = nil then
+  begin
+    FGetEnderecosCommand := FDBXConnection.CreateCommand;
+    FGetEnderecosCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FGetEnderecosCommand.Text := 'TServerMethods1.GetEnderecos';
+    FGetEnderecosCommand.Prepare;
+  end;
+  FGetEnderecosCommand.Parameters[0].Value.SetInt32(idpessoa);
+  FGetEnderecosCommand.ExecuteUpdate;
+  Result := TCustomSQLDataSet.Create(nil, FGetEnderecosCommand.Parameters[1].Value.GetDBXReader(False), True);
+  Result.Open;
+  if FInstanceOwner then
+    FGetEnderecosCommand.FreeOnExecute(Result);
+end;
+
+function TServerMethods1Client.SalvaPessoa(idpessoa: Integer; finatureza: Integer; dsdocumento: string; nmprimeiro: string; nmsegundo: string; dtregistro: TDateTime): Integer;
+begin
+  if FSalvaPessoaCommand = nil then
+  begin
+    FSalvaPessoaCommand := FDBXConnection(nil).CreateCommand;
+    FSalvaPessoaCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FSalvaPessoaCommand.Text := 'TServerMethods1.SalvaPessoa';
+    FSalvaPessoaCommand.Prepare;
+  end;
+  FSalvaPessoaCommand.Parameters[0].Value.SetInt32(idpessoa);
+  FSalvaPessoaCommand.Parameters[1].Value.SetInt32(finatureza);
+  FSalvaPessoaCommand.Parameters[2].Value.SetWideString(dsdocumento);
+  FSalvaPessoaCommand.Parameters[3].Value.SetWideString(nmprimeiro);
+  FSalvaPessoaCommand.Parameters[4].Value.SetWideString(nmsegundo);
+  FSalvaPessoaCommand.Parameters[5].Value.AsDateTime := dtregistro;
+  FSalvaPessoaCommand.ExecuteUpdate;
+  Result := FSalvaPessoaCommand.Parameters[6].Value.GetInt32;
+end;
+
+procedure TServerMethods1Client.ExcluiPessoa(idpessoa: Integer);
+begin
+  if FExcluiPessoaCommand = nil then
+  begin
+    FExcluiPessoaCommand := FDBXConnection.CreateCommand;
+    FExcluiPessoaCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FExcluiPessoaCommand.Text := 'TServerMethods1.ExcluiPessoa';
+    FExcluiPessoaCommand.Prepare;
+  end;
+  FExcluiPessoaCommand.Parameters[0].Value.SetInt32(idpessoa);
+  FExcluiPessoaCommand.ExecuteUpdate;
+end;
+
+function TServerMethods1Client.SalvaEndereco(idendereco: Integer; idpessoa: Integer; dscep: string; dsuf: string; nmcidade: string; nmbairro: string; nmlogradouro: string; dscomplemento: string): Integer;
+begin
+  if FSalvaEnderecoCommand = nil then
+  begin
+    FSalvaEnderecoCommand := FDBXConnection.CreateCommand;
+    FSalvaEnderecoCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FSalvaEnderecoCommand.Text := 'TServerMethods1.SalvaEndereco';
+    FSalvaEnderecoCommand.Prepare;
+  end;
+  FSalvaEnderecoCommand.Parameters[0].Value.SetInt32(idendereco);
+  FSalvaEnderecoCommand.Parameters[1].Value.SetInt32(idpessoa);
+  FSalvaEnderecoCommand.Parameters[2].Value.SetWideString(dscep);
+  FSalvaEnderecoCommand.Parameters[3].Value.SetWideString(dsuf);
+  FSalvaEnderecoCommand.Parameters[4].Value.SetWideString(nmcidade);
+  FSalvaEnderecoCommand.Parameters[5].Value.SetWideString(nmbairro);
+  FSalvaEnderecoCommand.Parameters[6].Value.SetWideString(nmlogradouro);
+  FSalvaEnderecoCommand.Parameters[7].Value.SetWideString(dscomplemento);
+  FSalvaEnderecoCommand.ExecuteUpdate;
+  Result := FSalvaEnderecoCommand.Parameters[8].Value.GetInt32;
+end;
+
+procedure TServerMethods1Client.ExcluiEndereco(idendereco: Integer);
+begin
+  if FExcluiEnderecoCommand = nil then
+  begin
+    FExcluiEnderecoCommand := FDBXConnection.CreateCommand;
+    FExcluiEnderecoCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FExcluiEnderecoCommand.Text := 'TServerMethods1.ExcluiEndereco';
+    FExcluiEnderecoCommand.Prepare;
+  end;
+  FExcluiEnderecoCommand.Parameters[0].Value.SetInt32(idendereco);
+  FExcluiEnderecoCommand.ExecuteUpdate;
+end;
+
+function TServerMethods1Client.GetNextId(sGenName: string): Integer;
+begin
+  if FGetNextIdCommand = nil then
+  begin
+    FGetNextIdCommand := FDBXConnection.CreateCommand;
+    FGetNextIdCommand.CommandType := TDBXCommandTypes.DSServerMethod;
+    FGetNextIdCommand.Text := 'TServerMethods1.GetNextId';
+    FGetNextIdCommand.Prepare;
+  end;
+  FGetNextIdCommand.Parameters[0].Value.SetWideString(sGenName);
+  FGetNextIdCommand.ExecuteUpdate;
+  Result := FGetNextIdCommand.Parameters[1].Value.GetInt32;
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection);
+begin
+  inherited Create(ADBXConnection);
+end;
+
+
+constructor TServerMethods1Client.Create(ADBXConnection: TDBXConnection; AInstanceOwner: Boolean);
+begin
+  inherited Create(ADBXConnection, AInstanceOwner);
+end;
+
+
+destructor TServerMethods1Client.Destroy;
+begin
+  FEchoStringCommand.DisposeOf;
+  FReverseStringCommand.DisposeOf;
+  FGetPessoasCommand.DisposeOf;
+  FGetEnderecosCommand.DisposeOf;
+  FSalvaPessoaCommand.DisposeOf;
+  FExcluiPessoaCommand.DisposeOf;
+  FSalvaEnderecoCommand.DisposeOf;
+  FExcluiEnderecoCommand.DisposeOf;
+  FGetNextIdCommand.DisposeOf;
+  inherited;
+end;
+
+end.
+

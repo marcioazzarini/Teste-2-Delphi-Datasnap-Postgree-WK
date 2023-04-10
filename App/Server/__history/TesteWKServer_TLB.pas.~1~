@@ -1,0 +1,128 @@
+unit TesteWKServer_TLB;
+
+// ************************************************************************ //
+// WARNING
+// -------
+// The types declared in this file were generated from data read from a
+// Type Library. If this type library is explicitly or indirectly (via
+// another type library referring to this type library) re-imported, or the
+// 'Refresh' command of the Type Library Editor activated while editing the
+// Type Library, the contents of this file will be regenerated and all
+// manual modifications will be lost.
+// ************************************************************************ //
+
+// $Rev: 52393 $
+// File generated on 08/04/2023 11:52:36 from Type Library described below.
+
+// ************************************************************************  //
+// Type Lib: C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\TesteWKServer (1)
+// LIBID: {B1885582-B274-4906-8C90-B8F54917FB72}
+// LCID: 0
+// Helpfile:
+// HelpString:
+// DepndLst:
+//   (1) v2.0 stdole, (C:\Windows\SysWOW64\stdole2.tlb)
+//   (2) v1.0 Midas, (c:\program files (x86)\embarcadero\studio\21.0\bin\midas.dll)
+// SYS_KIND: SYS_WIN32
+// ************************************************************************ //
+{$TYPEDADDRESS OFF} // Unit must be compiled without type-checked pointers.
+{$WARN SYMBOL_PLATFORM OFF}
+{$WRITEABLECONST ON}
+{$VARPROPSETTER ON}
+{$ALIGN 4}
+
+interface
+
+uses Winapi.Windows, Midas, System.Classes, System.Variants, System.Win.StdVCL, Vcl.Graphics, Vcl.OleServer, Winapi.ActiveX;
+
+
+
+// *********************************************************************//
+// GUIDS declared in the TypeLibrary. Following prefixes are used:
+//   Type Libraries     : LIBID_xxxx
+//   CoClasses          : CLASS_xxxx
+//   DISPInterfaces     : DIID_xxxx
+//   Non-DISP interfaces: IID_xxxx
+// *********************************************************************//
+const
+  // TypeLibrary Major and minor versions
+  TesteWKServerMajorVersion = 1;
+  TesteWKServerMinorVersion = 0;
+
+  LIBID_TesteWKServer: TGUID = '{B1885582-B274-4906-8C90-B8F54917FB72}';
+
+  IID_IrdmWKTech: TGUID = '{E4C5F44D-7E16-4524-AF15-F671094864F8}';
+  CLASS_rdmWKTech: TGUID = '{27F37CF4-4463-46F5-B5E9-58C40C162E5F}';
+type
+
+// *********************************************************************//
+// Forward declaration of types defined in TypeLibrary
+// *********************************************************************//
+  IrdmWKTech = interface;
+  IrdmWKTechDisp = dispinterface;
+
+// *********************************************************************//
+// Declaration of CoClasses defined in Type Library
+// (NOTE: Here we map each CoClass to its Default Interface)
+// *********************************************************************//
+  rdmWKTech = IrdmWKTech;
+
+
+// *********************************************************************//
+// Interface: IrdmWKTech
+// Flags:     (4416) Dual OleAutomation Dispatchable
+// GUID:      {E4C5F44D-7E16-4524-AF15-F671094864F8}
+// *********************************************************************//
+  IrdmWKTech = interface(IAppServer)
+    ['{E4C5F44D-7E16-4524-AF15-F671094864F8}']
+  end;
+
+// *********************************************************************//
+// DispIntf:  IrdmWKTechDisp
+// Flags:     (4416) Dual OleAutomation Dispatchable
+// GUID:      {E4C5F44D-7E16-4524-AF15-F671094864F8}
+// *********************************************************************//
+  IrdmWKTechDisp = dispinterface
+    ['{E4C5F44D-7E16-4524-AF15-F671094864F8}']
+    function AS_ApplyUpdates(const ProviderName: WideString; Delta: OleVariant; MaxErrors: SYSINT;
+                             out ErrorCount: SYSINT; var OwnerData: OleVariant): OleVariant; dispid 20000000;
+    function AS_GetRecords(const ProviderName: WideString; Count: SYSINT; out RecsOut: SYSINT;
+                           Options: SYSINT; const CommandText: WideString; var Params: OleVariant;
+                           var OwnerData: OleVariant): OleVariant; dispid 20000001;
+    function AS_DataRequest(const ProviderName: WideString; Data: OleVariant): OleVariant; dispid 20000002;
+    function AS_GetProviderNames: OleVariant; dispid 20000003;
+    function AS_GetParams(const ProviderName: WideString; var OwnerData: OleVariant): OleVariant; dispid 20000004;
+    function AS_RowRequest(const ProviderName: WideString; Row: OleVariant; RequestType: SYSINT;
+                           var OwnerData: OleVariant): OleVariant; dispid 20000005;
+    procedure AS_Execute(const ProviderName: WideString; const CommandText: WideString;
+                         var Params: OleVariant; var OwnerData: OleVariant); dispid 20000006;
+  end;
+
+// *********************************************************************//
+// The Class CordmWKTech provides a Create and CreateRemote method to
+// create instances of the default interface IrdmWKTech exposed by
+// the CoClass rdmWKTech. The functions are intended to be used by
+// clients wishing to automate the CoClass objects exposed by the
+// server of this typelibrary.
+// *********************************************************************//
+  CordmWKTech = class
+    class function Create: IrdmWKTech;
+    class function CreateRemote(const MachineName: string): IrdmWKTech;
+  end;
+
+implementation
+
+uses System.Win.ComObj;
+
+class function CordmWKTech.Create: IrdmWKTech;
+begin
+  Result := CreateComObject(CLASS_rdmWKTech) as IrdmWKTech;
+end;
+
+class function CordmWKTech.CreateRemote(const MachineName: string): IrdmWKTech;
+begin
+  Result := CreateRemoteComObject(MachineName, CLASS_rdmWKTech) as IrdmWKTech;
+end;
+
+end.
+

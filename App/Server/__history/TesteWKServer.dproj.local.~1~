@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2023/04/08 09:23:40.000.876,=C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 09:23:41.000.952,=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2023/04/08 09:23:41.000.517,=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2023/04/08 09:40:07.000.847,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uMain.dfm=C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2023/04/08 09:40:07.000.847,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uMain.pas=C:\Users\marci\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 09:40:36.000.147,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uServerMethods.pas=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2023/04/08 09:40:36.000.147,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uServerMethods.dfm=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerMethodsUnit1.dfm</Transaction>
+    <Transaction>2023/04/08 09:40:42.000.624,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uServerContainer.pas=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2023/04/08 09:40:42.000.624,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uServerContainer.dfm=C:\Users\marci\Documents\Embarcadero\Studio\Projects\ServerContainerUnit1.dfm</Transaction>
+    <Transaction>2023/04/08 09:40:57.000.821,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\TesteWKServer.dproj=C:\Users\marci\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2023/04/08 09:41:19.000.396,=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 09:41:25.000.372,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uDM.pas=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\Unit1.pas</Transaction>
+    <Transaction>2023/04/08 09:41:25.000.372,C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\uDM.dfm=C:\testes_wk\teste2\Teste-2-Delphi-Datasnap-Postgree-WK\App\Server\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

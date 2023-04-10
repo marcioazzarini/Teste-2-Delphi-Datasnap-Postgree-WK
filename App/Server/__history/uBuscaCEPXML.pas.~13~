@@ -1,0 +1,95 @@
+unit uBuscaCEPXML;
+
+interface
+
+uses
+  System.SysUtils, Xml.xmldom, Xml.XMLIntf, Xml.XMLDoc, Xml.Win.msxmldom;
+
+type
+  TBuscaCEPXML = class (TObject)
+  strict private
+    FCep: string;
+    FLogradouro: string;
+    FBairro: string;
+    FLocalidade: string;
+    FUF: string;
+    FIBGE: string;
+  private
+    procedure proLocalizaCep;
+  public
+    constructor Create(const Cep: string); overload;
+    property Cep: string read FCep;
+    property Logradouro: string read FLogradouro;
+    property Bairro: string read FBairro;
+    property Localidade: string read FLocalidade;
+    property UF: string read FUF;
+    property IBGE: string read FIBGE;
+  end;
+
+implementation
+
+{ TBuscaCEPXML }
+
+constructor TBuscaCEPXML.Create(const Cep: string);
+begin
+  FCep := Cep;
+  FLogradouro := '';
+  FBairro := '';
+  FLocalidade := '';
+  FUF := '';
+  FIBGE := '';
+  proLocalizaCep;
+end;
+
+procedure TBuscaCEPXML.proLocalizaCep;
+const
+  sDesCep = 'cep';
+  sDesLogradouro = 'logradouro';
+  sDesBairro = 'bairro';
+  sDesLocalidade = 'localidade';
+  sDesUF = 'uf';
+  sURLWS = 'https://viacep.com.br/ws/';
+  sURLFinalXML = '/xml/';
+  sDesERRO = 'erro';
+  sTrue = 'true';
+var
+  XMLDoc: IXMLDocument;
+begin
+  FCep := StringReplace(Cep, '-', '', [rfReplaceAll]).Trim;
+
+  if Cep.IsEmpty then
+  begin
+    FCep := '-1';
+    FLocalidade := 'CEP não pode ser vazio';
+  end;
+
+  if Cep.Length <> 8 then
+  begin
+    FCep := '-1';
+    FLocalidade := 'CEP Inválido';
+  end;
+
+
+  XMLDoc := TXMLDocument.Create(nil);
+  try
+    XMLDoc.FileName := sURLWS + Cep + sURLFinalXML;
+    XMLDoc.Active := True;
+
+    if XMLDoc.DocumentElement.ChildValues[0] = sTrue then
+    begin
+      FCEP := '-1';
+      FLocalidade := 'CEP Não Encontrado';
+      Exit;
+    end;
+
+    FCep := XMLDoc.DocumentElement.ChildNodes[sDesCep].Text;
+    FLogradouro := XMLDoc.DocumentElement.ChildNodes[sDesLogradouro].Text;
+    FBairro := XMLDoc.DocumentElement.ChildNodes[sDesBairro].Text;
+    FLocalidade := XMLDoc.DocumentElement.ChildNodes[sDesLocalidade].Text;
+    FUF := XMLDoc.DocumentElement.ChildNodes[sDesUF].Text;
+  finally
+    XMLDoc := nil;
+  end;
+end;
+
+end.

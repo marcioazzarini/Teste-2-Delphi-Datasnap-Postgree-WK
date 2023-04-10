@@ -1,0 +1,114 @@
+object rdmWKTech: TrdmWKTech
+  OldCreateOrder = False
+  Height = 381
+  Width = 557
+  object qryPessoa: TFDQuery
+    Connection = DataModule1.FDConn
+    SQL.Strings = (
+      'SELECT * '
+      'FROM pessoa')
+    Left = 104
+    Top = 40
+    object qryPessoaidpessoa: TLargeintField
+      AutoGenerateValue = arDefault
+      FieldName = 'idpessoa'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryPessoafinatureza: TSmallintField
+      AutoGenerateValue = arDefault
+      FieldName = 'finatureza'
+    end
+    object qryPessoadsdocumento: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'dsdocumento'
+    end
+    object qryPessoanmprimeiro: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nmprimeiro'
+      ProviderFlags = []
+      Size = 108
+    end
+    object qryPessoanmsegundo: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'nmsegundo'
+      ProviderFlags = []
+      Size = 100
+    end
+    object qryPessoadtregistro: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'dtregistro'
+      ProviderFlags = []
+    end
+  end
+  object dspPessoa: TDataSetProvider
+    DataSet = qryPessoa
+    Left = 104
+    Top = 104
+  end
+  object qryEndereco: TFDQuery
+    Connection = DataModule1.FDConn
+    SQL.Strings = (
+      'SELECT * FROM endereco')
+    Left = 192
+    Top = 40
+    object qryEnderecoidendereco: TLargeintField
+      FieldName = 'idendereco'
+    end
+    object qryEnderecoidpessoa: TLargeintField
+      FieldName = 'idpessoa'
+      Origin = 'idpessoa'
+    end
+    object qryEnderecodscep: TWideStringField
+      FieldName = 'dscep'
+      Origin = 'dscep'
+      Size = 15
+    end
+  end
+  object dspEndereco: TDataSetProvider
+    DataSet = qryEndereco
+    Left = 192
+    Top = 104
+  end
+  object qryEnderecoIntegracao: TFDQuery
+    Connection = DataModule1.FDConn
+    SQL.Strings = (
+      'SELECT * FROM endereco_integracao')
+    Left = 272
+    Top = 40
+    object qryEnderecoIntegracaoidendereco: TLargeintField
+      FieldName = 'idendereco'
+      Origin = 'idendereco'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryEnderecoIntegracaodsuf: TWideStringField
+      FieldName = 'dsuf'
+      Origin = 'dsuf'
+      Size = 50
+    end
+    object qryEnderecoIntegracaonmcidade: TWideStringField
+      FieldName = 'nmcidade'
+      Origin = 'nmcidade'
+      Size = 100
+    end
+    object qryEnderecoIntegracaonmbairro: TWideStringField
+      FieldName = 'nmbairro'
+      Origin = 'nmbairro'
+      Size = 50
+    end
+    object qryEnderecoIntegracaonmlogradouro: TWideStringField
+      FieldName = 'nmlogradouro'
+      Origin = 'nmlogradouro'
+      Size = 100
+    end
+    object qryEnderecoIntegracaodscomplemento: TWideStringField
+      FieldName = 'dscomplemento'
+      Origin = 'dscomplemento'
+      Size = 100
+    end
+  end
+  object dspEnderecoIntegracao: TDataSetProvider
+    DataSet = qryEnderecoIntegracao
+    Left = 272
+    Top = 104
+  end
+end

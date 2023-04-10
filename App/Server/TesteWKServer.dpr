@@ -1,0 +1,24 @@
+program TesteWKServer;
+
+uses
+  Vcl.Forms,
+  Web.WebReq,
+  IdHTTPWebBrokerBridge,
+  uMain in 'uMain.pas' {frmMain},
+  uServerMethods in 'uServerMethods.pas' {ServerMethods1: TDataModule},
+  uServerContainer in 'uServerContainer.pas' {ServerContainer1: TDataModule},
+  uDM in 'uDM.pas' {DM: TDataModule},
+  uBuscaCEPJson in 'uBuscaCEPJson.pas',
+  uBuscaCEPXML in 'uBuscaCEPXML.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.CreateForm(TServerContainer1, ServerContainer1);
+  Application.CreateForm(TDM, DM);
+  Application.Run;
+end.
+

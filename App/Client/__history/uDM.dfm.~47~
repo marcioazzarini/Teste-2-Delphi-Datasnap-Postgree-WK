@@ -1,0 +1,269 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 365
+  Width = 401
+  object SQLConnection1: TSQLConnection
+    ConnectionName = 'DataSnapCONNECTION'
+    DriverName = 'DataSnap'
+    LoginPrompt = False
+    Params.Strings = (
+      'DriverUnit=Data.DBXDataSnap'
+      
+        'DriverAssemblyLoader=Borland.Data.TDBXClientDriverLoader,Borland' +
+        '.Data.DbxClientDriver,Version=21.0.0.0,Culture=neutral,PublicKey' +
+        'Token=91d62ebb5b0d1b1b'
+      'DriverName=DataSnap'
+      'HostName=localhost'
+      'Port=211'
+      'Filters={}'
+      'DSProxyPort=8080'
+      'CommunicationProtocol=tcp/ip'
+      'DatasnapContext=datasnap/'
+      'DSAuthenticationPassword=teste'
+      'Password=teste'
+      
+        'ConnectionString=DriverUnit=Data.DBXDataSnap,DriverAssemblyLoade' +
+        'r=Borland.Data.TDBXClientDriverLoader,Borland.Data.DbxClientDriv' +
+        'er,Version=21.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1' +
+        'b1b,DriverName=DataSnap,HostName=localhost,Port=211,Filters={},D' +
+        'SProxyPort=8080,CommunicationProtocol=tcp/ip,DatasnapContext=dat' +
+        'asnap/,DSAuthenticationPassword=teste,Password=teste,ConnectionS' +
+        'tring=DriverUnit=Data.DBXDataSnap,DriverAssemblyLoader=Borland.D' +
+        'ata.TDBXClientDriverLoader,Borland.Data.DbxClientDriver,Version=' +
+        '21.0.0.0,Culture=neutral,PublicKeyToken=91d62ebb5b0d1b1b,DriverN' +
+        'ame=DataSnap,HostName=localhost,Port=211,Filters={},DSProxyPort=' +
+        '8080,CommunicationProtocol=tcp/ip,DatasnapContext=datasnap/,DSAu' +
+        'thenticationPassword=teste,Password=teste')
+    Connected = True
+    Left = 32
+    Top = 16
+    UniqueId = '{AB86C39B-1A9F-4621-A666-1E9B02E9E102}'
+  end
+  object ssmPessoas: TSqlServerMethod
+    Params = <
+      item
+        DataType = ftDataSet
+        Name = 'ReturnParameter'
+        ParamType = ptResult
+        Value = 'TDataSet'
+      end>
+    SQLConnection = SQLConnection1
+    ServerMethodName = 'TServerMethods1.GetPessoas'
+    Left = 32
+    Top = 80
+  end
+  object dspPessoas: TDataSetProvider
+    DataSet = ssmPessoas
+    Left = 32
+    Top = 128
+  end
+  object cdsPessoas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPessoas'
+    AfterInsert = cdsPessoasAfterInsert
+    BeforePost = cdsPessoasBeforePost
+    AfterDelete = cdsPessoasAfterDelete
+    Left = 32
+    Top = 192
+    object cdsPessoasidpessoa: TLargeintField
+      DisplayLabel = 'ID Pessoa'
+      FieldName = 'idpessoa'
+      Required = True
+    end
+    object cdsPessoasfinatureza: TSmallintField
+      DisplayLabel = 'Natureza'
+      FieldName = 'finatureza'
+      Required = True
+    end
+    object cdsPessoasdsdocumento: TWideStringField
+      DisplayLabel = 'Documento'
+      FieldName = 'dsdocumento'
+      Required = True
+      Size = 42
+    end
+    object cdsPessoasnmprimeiro: TWideStringField
+      DisplayLabel = 'Nome'
+      FieldName = 'nmprimeiro'
+      Required = True
+      Size = 218
+    end
+    object cdsPessoasnmsegundo: TWideStringField
+      DisplayLabel = 'Sobrenome'
+      FieldName = 'nmsegundo'
+      Required = True
+      Size = 202
+    end
+    object cdsPessoasdtregistro: TDateField
+      DisplayLabel = 'Data de Registro'
+      FieldName = 'dtregistro'
+      Required = True
+    end
+  end
+  object ssmEnderecos: TSqlServerMethod
+    Params = <
+      item
+        DataType = ftInteger
+        Precision = 4
+        Name = 'idpessoa'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftDataSet
+        Name = 'ReturnParameter'
+        ParamType = ptResult
+        Value = 'TDataSet'
+      end>
+    SQLConnection = SQLConnection1
+    ServerMethodName = 'TServerMethods1.GetEnderecos'
+    Left = 152
+    Top = 72
+  end
+  object dspEnderecos: TDataSetProvider
+    DataSet = ssmEnderecos
+    Left = 152
+    Top = 136
+  end
+  object cdsEnderecos: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftInteger
+        Precision = 4
+        Name = 'idpessoa'
+        ParamType = ptInput
+        Value = '1'
+      end
+      item
+        DataType = ftDataSet
+        Name = 'ReturnParameter'
+        ParamType = ptResult
+      end>
+    ProviderName = 'dspEnderecos'
+    AfterInsert = cdsEnderecosAfterInsert
+    AfterEdit = cdsEnderecosAfterEdit
+    BeforePost = cdsEnderecosBeforePost
+    BeforeDelete = cdsEnderecosBeforeDelete
+    Left = 152
+    Top = 200
+    object cdsEnderecosidendereco: TLargeintField
+      FieldName = 'idendereco'
+      Required = True
+    end
+    object cdsEnderecosidpessoa: TLargeintField
+      FieldName = 'idpessoa'
+      Required = True
+    end
+    object cdsEnderecosdscep: TWideStringField
+      DisplayLabel = 'CEP'
+      FieldName = 'dscep'
+      Required = True
+      EditMask = '00000\-999;1;_'
+      Size = 32
+    end
+    object cdsEnderecosdsuf: TWideStringField
+      DisplayLabel = 'UF'
+      FieldName = 'dsuf'
+      Required = True
+      Size = 102
+    end
+    object cdsEnderecosnmcidade: TWideStringField
+      DisplayLabel = 'Cidade'
+      FieldName = 'nmcidade'
+      Required = True
+      Size = 202
+    end
+    object cdsEnderecosnmbairro: TWideStringField
+      DisplayLabel = 'Bairro'
+      FieldName = 'nmbairro'
+      Required = True
+      Size = 102
+    end
+    object cdsEnderecosnmlogradouro: TWideStringField
+      DisplayLabel = 'Logradouro'
+      FieldName = 'nmlogradouro'
+      Required = True
+      Size = 202
+    end
+    object cdsEnderecosdscomplemento: TWideStringField
+      DisplayLabel = 'Complemento'
+      FieldName = 'dscomplemento'
+      Required = True
+      Size = 202
+    end
+  end
+  object ssmBuscaCEP: TSqlServerMethod
+    Params = <
+      item
+        DataType = ftWideString
+        Precision = 2000
+        Name = 'sCEP'
+        ParamType = ptInput
+        Value = '18040-040'
+      end
+      item
+        DataType = ftDataSet
+        Name = 'ReturnParameter'
+        ParamType = ptResult
+        Value = 'TDataSet'
+      end>
+    SQLConnection = SQLConnection1
+    ServerMethodName = 'TServerMethods1.GetCEP'
+    Left = 248
+    Top = 72
+  end
+  object dspBuscaCEP: TDataSetProvider
+    DataSet = ssmBuscaCEP
+    Left = 248
+    Top = 136
+  end
+  object cdsBuscaCEP: TClientDataSet
+    Aggregates = <>
+    Params = <
+      item
+        DataType = ftWideString
+        Precision = 2000
+        Name = 'sCEP'
+        ParamType = ptInput
+        Value = '18040-040'
+      end
+      item
+        DataType = ftDataSet
+        Name = 'ReturnParameter'
+        ParamType = ptResult
+      end>
+    ProviderName = 'dspBuscaCEP'
+    AfterInsert = cdsEnderecosAfterInsert
+    AfterEdit = cdsEnderecosAfterEdit
+    BeforePost = cdsEnderecosBeforePost
+    BeforeDelete = cdsEnderecosBeforeDelete
+    Left = 248
+    Top = 200
+    object cdsBuscaCEPCep: TStringField
+      FieldName = 'Cep'
+      Required = True
+      Size = 16
+    end
+    object cdsBuscaCEPLogradouro: TStringField
+      FieldName = 'Logradouro'
+      Required = True
+      Size = 201
+    end
+    object cdsBuscaCEPBairro: TStringField
+      FieldName = 'Bairro'
+      Required = True
+      Size = 201
+    end
+    object cdsBuscaCEPLocalidade: TStringField
+      FieldName = 'Localidade'
+      Required = True
+      Size = 201
+    end
+    object cdsBuscaCEPUF: TStringField
+      FieldName = 'UF'
+      Required = True
+      Size = 3
+    end
+  end
+end

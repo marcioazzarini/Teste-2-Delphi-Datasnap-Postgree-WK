@@ -1,0 +1,22 @@
+unit uInterfaceClass;
+
+interface
+
+INotebook = interface
+  function BuscarTamanhoTela: string;
+  function BuscarMemoriaRAM: string;
+end;
+
+IDesktop = interface
+  function BuscarNomeProcessador: string;
+  function BuscarTamanhoHD: string;
+end;
+
+IFactoryMarca = interface
+  function ConsultarNotebook: INotebook;
+  function ConsultarDesktop: IDesktop;
+end;
+
+implementation
+
+end.

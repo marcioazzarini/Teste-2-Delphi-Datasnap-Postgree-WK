@@ -1,0 +1,29 @@
+unit uCEPClass;
+
+interface
+
+type
+  TBuscaCEPXML = class (TObject)
+  strict private
+    FCEP: string;
+    FLogradouro: string;
+    FBairro: string;
+    FLocalidade: string;
+    FUF: string;
+    FIBGE: string;
+  private
+    procedure proLocalizaCep;
+  public
+    property CEP: string read FCEP;
+    property Logradouro: string read FLogradouro;
+    property Bairro: string read FBairro;
+    property Localidade: string read FLocalidade;
+    property UF: string read FUF;
+    property IBGE: string read FIBGE;
+
+    constructor Create(sCEP: string); overload;
+  end;
+
+implementation
+
+end.

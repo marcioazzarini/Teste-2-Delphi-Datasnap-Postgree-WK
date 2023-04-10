@@ -1,0 +1,13 @@
+unit uInterfaceClass;
+
+interface
+
+type
+  IEntidade = interface
+    function BuscarTamanhoTela: string;
+    function BuscarMemoriaRAM: string;
+  end;
+
+implementation
+
+end.

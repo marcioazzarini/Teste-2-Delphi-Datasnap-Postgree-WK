@@ -1,0 +1,102 @@
+unit uBuscaCEP;
+
+interface
+
+uses
+  System.Classes, REST.Json.Types, REST.Json, IdHTTP, IdSSLOpenSSL, System.SysUtils, System.Math;
+
+type
+  TBuscaCEPClass = class
+  private
+    FLogradouro: string;
+    [JSONNameAttribute('ibge')]
+    FIBGE: string;
+    FBairro: string;
+    [JSONNameAttribute('uf')]
+    FUF: string;
+    [JSONNameAttribute('cep')]
+    FCEP: string;
+    FLocalidade: string;
+    FComplemento: string;
+    [JSONNameAttribute('gia')]
+    FGIA: string;
+    [JSONNameAttribute('ddd')]
+    FDDD: string;
+  public
+    property CEP: string read FCEP write FCEP;
+    property Logradouro: string read FLogradouro write FLogradouro;
+    property Complemento: string read FComplemento write FComplemento;
+    property Bairro: string read FBairro write FBairro;
+    property Localidade: string read FLocalidade write FLocalidade;
+    property UF: string read FUF write FUF;
+    property IBGE: string read FIBGE write FIBGE;
+    property GIA: string read FGIA write FGIA;
+    property DDD: string read FDDD write FDDD;
+
+    class function BuscaCEP(const sCEP: string): TBuscaCEPClass;
+  end;
+
+implementation
+
+
+
+{ TBuscaCEPClass }
+
+class function TBuscaCEPClass.BuscaCEP(const sCEP: string): TBuscaCEPClass;
+var
+  s: string;
+  lHTTP: TIdHTTP;
+  idSSL: TIdSSLIOHandlerSocketOpenSSL;
+begin
+  lHTTP := TIdHTTP.Create(nil);
+  try
+    idSSL := TIdSSLIOHandlerSocketOpenSSL.Create(lHTTP);
+    idSSL.SSLOptions.Method := sslvSSLv3;
+    idSSL.SSLOptions.Mode := sslmUnassigned;
+    idSSL.SSLOptions.SSLVersions := [sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2];
+    idSSL.ConnectTimeout := -1;
+
+
+    lHTTP.IOHandler := idSSL;
+    lHTTP.HandleRedirects := True;
+    lHTTP.Request.UserAgent := Format('Mozilla/%d.0 (Windows NT %d.%d; rv:2.0.1) Gecko/20100101 Firefox/%d.%d.%d', [RandomRange(3, 5), RandomRange(3, 5), Random(2), RandomRange(3, 5), Random(5), Random(5)]);
+    lHTTP.Request.Connection := 'keep-alive';
+    lHTTP.ProtocolVersion := TIdHTTP
+
+    s := lHTTP.Get('https://viacep.com.br/ws/'+sCEP+'/json');
+
+   Result := TJson.JsonToObject<TBuscaCEPClass>(s);
+  finally
+    lHTTP.Free;
+  end;
+end;
+
+{
+class function TBuscaCEPClass.BuscaCEP(const sCEP: string): TBuscaCEPClass;
+const
+  sErro = '{'#$A'  "erro": true'#$A'}{';
+var
+  streamRet: TStringStream;
+  IdHTTP: TIdHTTP;
+  IdSSLIOHandlerSocketOpenSSL: TIdSSLIOHandlerSocketOpenSSL;
+  sURL: String;
+begin
+  IdHTTP := TIdHTTP.Create;
+  IdSSLIOHandlerSocketOpenSSL := TIdSSLIOHandlerSocketOpenSSL.Create;
+  IdHTTP.IOHandler := IdSSLIOHandlerSocketOpenSSL;
+  //IdSSLIOHandlerSocketOpenSSL.SSLOptions.SSLVersions := [sslvTLSv1, sslvTLSv1_1, sslvTLSv1_2];
+
+  sURL := 'https://viacep.com.br/ws/'+sCEP+'/json';
+
+  streamRet := TStringStream.Create;
+  try
+    IdHTTP.Get(sURL, streamRet);
+    if (IdHTTP.ResponseCode = 200) and (not (streamRet.DataString).Equals(sErro)) then
+      Result := TJson.JsonToObject<TBuscaCEPClass>(
+              UTF8ToString(PAnsiChar(AnsiString(streamRet.DataString))));
+  finally
+    streamRet.Free;
+  end;
+end;  }
+
+end.

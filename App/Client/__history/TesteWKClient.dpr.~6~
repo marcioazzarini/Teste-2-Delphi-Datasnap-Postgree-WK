@@ -1,0 +1,17 @@
+program TesteWKClient;
+
+uses
+  Vcl.Forms,
+  uCadPessoa in 'uCadPessoa.pas' {frmCadPessoa},
+  uDM in 'uDM.pas' {DM: TDataModule},
+  uServerCalls in 'uServerCalls.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmCadPessoa, frmCadPessoa);
+  Application.CreateForm(TDM, DM);
+  Application.Run;
+end.
