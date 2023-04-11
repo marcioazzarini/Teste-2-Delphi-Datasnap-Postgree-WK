@@ -4,4 +4,4 @@ Obs.: Tive problemas de certificado em minha máquina para acesso À API de reto
 
 Senti a falta da coluna para Número do Endereço da pessoa. Não adicionei pois não sei se o programa será testado com minha base (anexa na pasta BD) ou em uma base padrão da WK.
 
-Na raiz do projeto encontra-se o arquivo CSV modelo para importação dos dados (PESSOAS.CSV)
+Na raiz do projeto encontra-se o arquivo CSV modelo para importação dos dados (<a href="https://github.com/marcioazzarini/Teste-2-Delphi-Datasnap-Postgree-WK/blob/main/PESSOAS.CSV">PESSOAS.CSV</a>)
