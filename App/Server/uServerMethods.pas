@@ -129,16 +129,20 @@ var
 begin
   objCEP := TBuscaCEPXML.Create(sCEP);
 
-  cdsRetornoCEP.Open;
-  cdsRetornoCEP.EmptyDataSet;
-  cdsRetornoCEP.Insert;
-  cdsRetornoCEPCep.AsString := objCEP.CEP;
-  cdsRetornoCEPUF.AsString := objCEP.UF;
-  cdsRetornoCEPBairro.AsString := objCEP.Bairro;
-  cdsRetornoCEPLocalidade.AsString := objCEP.Localidade;
-  cdsRetornoCEPLogradouro.AsString := objCEP.Logradouro;
+  try
+    cdsRetornoCEP.Open;
+    cdsRetornoCEP.EmptyDataSet;
+    cdsRetornoCEP.Insert;
+    cdsRetornoCEPCep.AsString := objCEP.CEP;
+    cdsRetornoCEPUF.AsString := objCEP.UF;
+    cdsRetornoCEPBairro.AsString := objCEP.Bairro;
+    cdsRetornoCEPLocalidade.AsString := objCEP.Localidade;
+    cdsRetornoCEPLogradouro.AsString := objCEP.Logradouro;
 
-  Result := cdsRetornoCEP;
+    Result := cdsRetornoCEP;
+  finally
+    objCEP.Free;
+  end;
 end;
 
 function TServerMethods1.GetEnd(idpessoa: integer): TDataSet;
