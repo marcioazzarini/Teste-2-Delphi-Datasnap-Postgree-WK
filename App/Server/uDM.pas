@@ -13,6 +13,7 @@ uses
 type
   TDM = class(TDataModule)
     FDConn: TFDConnection;
+    FDPhysPgDriverLink1: TFDPhysPgDriverLink;
   private
     { Private declarations }
   public

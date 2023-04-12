@@ -14,4 +14,10 @@ object DM: TDM
     Left = 32
     Top = 32
   end
+  object FDPhysPgDriverLink1: TFDPhysPgDriverLink
+    DriverID = 'PG'
+    VendorLib = 'libpq.dll'
+    Left = 152
+    Top = 40
+  end
 end

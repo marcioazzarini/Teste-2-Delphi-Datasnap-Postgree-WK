@@ -398,8 +398,8 @@ object ServerMethods1: TServerMethods1
   end
   object dspEnd: TDataSetProvider
     DataSet = qryEnd
-    Left = 576
-    Top = 80
+    Left = 568
+    Top = 88
   end
   object qryEnderecoPessoaDelete: TFDQuery
     Connection = DM.FDConn
