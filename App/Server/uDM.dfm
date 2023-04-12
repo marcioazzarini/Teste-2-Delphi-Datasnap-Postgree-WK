@@ -9,15 +9,14 @@ object DM: TDM
       'User_Name=postgres'
       'Password=ogampl28!'
       'DriverID=PG')
-    Connected = True
     LoginPrompt = False
     Left = 32
     Top = 32
   end
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
-    VendorLib = 'libpq.dll'
-    Left = 152
-    Top = 40
+    VendorLib = 'libmysql.dll'
+    Left = 144
+    Top = 32
   end
 end
