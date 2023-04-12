@@ -10,8 +10,8 @@ object DM: TDM
       'Password=ogampl28!'
       'DriverID=PG')
     LoginPrompt = False
-    Left = 40
-    Top = 40
+    Left = 32
+    Top = 32
   end
   object FDPhysPgDriverLink1: TFDPhysPgDriverLink
     DriverID = 'PG'
